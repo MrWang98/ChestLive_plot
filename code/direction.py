@@ -42,9 +42,15 @@ idxs=[0,1,2,5,6,10,16,20]
 # for i,line in enumerate(data_pre):
 #     for idx in idxs:
 #         data[i].append(line[idx])
+average=[0 for i in range(data_pre.shape[1])]
 data=[]
+i=0
 for idx in idxs:
     data.append(data_pre[idx][:])
+    i = i + 1
+    for v in range(data_pre.shape[1]):
+        average[v] = average[v] + data_pre[idx][v]
+average = [d / i for d in average]
 
 r=50;g=110;b=90
 # colors=['rgb(57,116,94)','rgb(64,134,98)','rgb(83,149,103)']
@@ -55,13 +61,20 @@ fig = go.Figure()
 for d,name,color in zip(data,names,colors):
     # x = ['U{}'.format(i+1) for i in range(len(d))]
     fig.add_trace(go.Bar(
+                         showlegend=False,
                          name=name,
                          x=x,
                          y=d,
                          marker=dict(
                              color=color,
                          )))
-
+fig.add_scatter(x=x,
+                y=average,
+                name='Average',
+                marker=dict(
+                    color='black',
+                )
+                )
 #设置参数
 fig.update_layout(
                 # showlegend=False,

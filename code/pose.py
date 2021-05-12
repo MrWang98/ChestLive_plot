@@ -24,6 +24,7 @@ else:
     with open(file_name) as f:
         text=f.readlines()
 data_pre=[]
+
 for line in text:
     t=[]
     line=line.split(',')
@@ -41,9 +42,16 @@ for line in text:
 data_pre=np.array(data_pre)
 data_pre=data_pre.T
 idxs=[0,1,2,6,7,11,15,16]
+average=[0 for i in range(data_pre.shape[1])]
 data=[]
+i=0
 for idx in idxs:
     data.append(data_pre[idx][:])
+    i=i+1
+    for v in range(data_pre.shape[1]):
+        average[v]=average[v]+data_pre[idx][v]
+average=[d/i for d in average]
+
 x = ['Sit on chair', 'Lying', 'Sit on sofa', 'Stand', 'Walk']
 names=['U{}'.format(i+1) for i in range(len(data))]
 
@@ -53,7 +61,7 @@ colors=['rgb({},{},{})'.format(r+(i+1)*8,g+(i+1)*18,b+(i+1)*6) for i in range(le
 #画图
 fig = go.Figure()
 for d,name,color in zip(data,names,colors):
-    fig.add_trace(go.Bar(
+    fig.add_trace(go.Bar(showlegend=False,
                          x=x,
                          y=d,
                          name=name,
@@ -61,6 +69,14 @@ for d,name,color in zip(data,names,colors):
                             color=color,
                          )
     ))
+
+fig.add_scatter(x=x,
+                y=average,
+                name='Average',
+                marker=dict(
+                    color='black',
+                )
+                )
 
 #设置参数
 fig.update_layout(

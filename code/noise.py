@@ -2,6 +2,7 @@ import os
 import numpy as np
 import plotly as py
 import plotly.io as pio
+import plotly.express as px
 import plotly.graph_objects as go
 pyplot = py.offline.plot
 
@@ -24,34 +25,31 @@ else:
     with open(file_name) as f:
         text=f.readlines()
 data_pre=[]
-average=[]
 for line in text:
     t=[]
-    a=0
-    i=0
     line=line.split(',')
     for d in line:
         if d == '':
             pass
         else:
-            # a=a+
             t.append(float(d) * 100)
     data_pre.append(t)
 
-
 idxs=[1,2,3,6,7,9,11,12,]
 
-# data=data_pre
-# names=['50db','55db','65db']
-# x=['U{}'.format(i+1) for i in range(len(data[0][:]))]
-
 data_pre=np.array(data_pre).T
+average=[0 for i in range(data_pre.shape[1])]
 data=[]
+i=0
 for idx in idxs:
     data.append(data_pre[idx][:])
+    i = i + 1
+    for v in range(data_pre.shape[1]):
+        average[v] = average[v] + data_pre[idx][v]
+average = [d / i for d in average]
+
 names=['U{}'.format(i+1) for i in range(len(data))]
 x=['50db','55db','65db']
-
 
 r=50;g=110;b=90
 colors=['rgb({},{},{})'.format(r+(i+1)*8,g+(i+1)*18,b+(i+1)*6) for i in range(len(data))]
@@ -63,15 +61,19 @@ for d,name,color in zip(data,names,colors):
                         x=x,
                         y=d,
                         name=name,
+                        showlegend=False,
                         marker=dict(
                             color=color,
                         )
                         # boxpoints='all',
                         ))
-fig.add_trace(
-
-
-)
+fig.add_scatter(x=x,
+                y=average,
+                name='Average',
+                marker=dict(
+                    color='black',
+                )
+                )
 #设置参数
 fig.update_layout(
                 # showlegend=False,
