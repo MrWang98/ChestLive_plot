@@ -26,59 +26,69 @@ data_pre=[]
 average=[]
 for line in text:
     t=[]
-    a=0
-    i=0
     line=line.split(',')
     for d in line:
         if d == '':
             pass
         else:
-            a=a+float(d)*100
-            i=i+1
             t.append(float(d) * 100)
     data_pre.append(t)
-    average.append(a/i)
 
-# idxs=[0,3,10,12,14,17]
-
-
-# idxs=[0]
 # data=[[],[],[]]
 # for i,line in enumerate(data_pre):
 #     for idx in idxs:
 #         data[i].append(line[idx])
-data=data_pre
-names=['5','10','15','20','25','30']
-x=['U{}'.format(i+1) for i in range(len(data[0][:]))]
+# data=data_pre
+# names=['5','10','15','20','25','30']
+# x=['U{}'.format(i+1) for i in range(len(data[0][:]))]
 
-# data_pre=np.array(data_pre).T
-# data=[]
-# for idx in idxs:
-#     data.append(data_pre[idx][:])
-# names=['U{}'.format(i+1) for i in range(len(data))]
-# x=['5','10','15','20','25','30']
+idxs=[0,2,3,4,10,12,14,17]
+data_pre=np.array(data_pre).T
+average=[0 for i in range(data_pre.shape[1])]
+data=[]
+i=0
+for idx in idxs:
+    data.append(data_pre[idx][:])
+    i = i + 1
+    for v in range(data_pre.shape[1]):
+        average[v] = average[v] + data_pre[idx][v]
+average = [d / i for d in average]
+
+names=['U{}'.format(i+1) for i in range(len(data))]
+x=['5','10','15','20','25','30']
+
+r=50;g=110;b=90
+colors=['rgb({},{},{})'.format(r+(i+1)*8,g+(i+1)*18,b+(i+1)*6) for i in range(len(data))]
 
 #画图
 fig = go.Figure()
-for d,name in zip(data,names):
-    fig.add_trace(go.Bar(
+for d,name,color in zip(data,names,colors):
+    fig.add_trace(go.Bar(showlegend=False,
                          x=x,
                          y=d,
                          name=name,
-                         # boxpoints='all',
+                         marker=dict(
+                             color=color,
+                         )
                          ))
-
+fig.add_scatter(x=x,
+                y=average,
+                name='Average',
+                marker=dict(
+                    color='black',
+                )
+                )
 #设置参数
 fig.update_layout(
                 # showlegend=False,
-                height=520 ,width = 1000,
+                height=520 ,width = 620,
                 font=dict(
                     family="Time New Roman",  # 所有标题文字的字体
                     size = 32, # 所有标题文字的大小
                 ),
                 template='simple_white',
                 yaxis=dict(
-                    range=[80,100],
+                    range=[90,100],
                 ),
                 )
 fig.update_xaxes(title='Distance(cm)',
