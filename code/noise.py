@@ -72,7 +72,17 @@ fig.add_scatter(x=x,
                 name='Average',
                 marker=dict(
                     color='black',
-                )
+                ),
+                legend=dict(
+                        orientation="h",  # 将legend改为横排放置
+                        yanchor="bottom",
+                        y=1.02,
+                        xanchor="right",
+                        x=1,
+                        font=dict(
+                            size=32,  # 25
+                            color='black', )
+                    ),
                 )
 #设置参数
 fig.update_layout(

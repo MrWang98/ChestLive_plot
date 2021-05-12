@@ -79,6 +79,10 @@ fig.add_scatter(x=x,
                 )
                 )
 #设置参数
+font=dict(
+    family="Time New Roman",  # 所有标题文字的字体
+    size = 32, # 所有标题文字的大小
+)
 fig.update_layout(
                 # showlegend=False,
                 height=520 ,width = 620,
@@ -90,6 +94,16 @@ fig.update_layout(
                 yaxis=dict(
                     range=[90,100],
                 ),
+                legend=dict(
+                    orientation="h",  # 将legend改为横排放置
+                    yanchor="bottom",
+                    y=1.02,
+                    xanchor="right",
+                    x=1,
+                    font=dict(
+                        size=32,  # 25
+                        color='black', )
+                ),
                 )
 fig.update_xaxes(title='Distance(cm)',
                  showgrid=True,#将网格去掉
@@ -97,6 +111,7 @@ fig.update_xaxes(title='Distance(cm)',
                  linecolor='black', # 将颜色设定为黑色
                  mirror=True,
                  gridcolor='#F2F2F2',
+                 titlefont=font,
                  )     # 加上这个  四周都是黑色  ，不加的话只有左下两条线黑色  （就是镜像过去）
 fig.update_yaxes(title='Accuracy(%)',
                  showgrid=True,
@@ -104,6 +119,7 @@ fig.update_yaxes(title='Accuracy(%)',
                  linecolor='black',
                  mirror=True,
                  gridcolor='#F2F2F2',
+                 titlefont=font,
                  )
 html_path = os.path.join(h_path,"Distance.html")
 # pio.write_image(fig,os.path.join(i_path,'Distance.eps'))
