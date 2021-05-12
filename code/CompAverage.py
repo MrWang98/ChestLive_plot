@@ -35,68 +35,44 @@ for line in text:
             t.append(float(d) * 100)
     data_pre.append(t)
 
-idxs=[1,2,3,6,7,9,11,12,]
-
-data_pre=np.array(data_pre).T
-average=[0 for i in range(data_pre.shape[1])]
-data=[]
-i=0
-for idx in idxs:
-    data.append(data_pre[idx][:])
-    i = i + 1
-    for v in range(data_pre.shape[1]):
-        average[v] = average[v] + data_pre[idx][v]
-average = [d / i for d in average]
-
-names=['U{}'.format(i+1) for i in range(len(data))]
+data=data_pre
 x=['50db','55db','65db']
-
-r=50;g=110;b=90
-colors=['rgb({},{},{})'.format(r+(i+1)*8,g+(i+1)*18,b+(i+1)*6) for i in range(len(data))]
+colors=['#CFC5BB','#AC9B91']
+names=['WeChat','ChestLive']
 
 #画图
 fig = go.Figure()
-for d,name,color in zip(data,names,colors):
+for d,color,name in zip(data,colors,names):
     fig.add_trace(go.Bar(
                         x=x,
                         y=d,
                         name=name,
-                        showlegend=False,
                         marker=dict(
                             color=color,
                         )
-                        # boxpoints='all',
                         ))
-fig.add_scatter(x=x,
-                y=average,
-                name='Average',
-                marker=dict(
-                    color='black',
-                ),
-                legend=dict(
-                        orientation="h",  # 将legend改为横排放置
-                        yanchor="bottom",
-                        y=1.02,
-                        xanchor="right",
-                        x=1,
-                        font=dict(
-                            size=32,  # 25
-                            color='black', )
-                    ),
-                )
+
 #设置参数
 fig.update_layout(
-                # showlegend=False,
                 height=520 ,width = 620,
                 font=dict(
-                    family="Time New Roman",  # 所有标题文字的字体
+                    family="Times New Roman",  # 所有标题文字的字体
                     size = 32, # 所有标题文字的大小
                 ),
                 template='simple_white',
-                yaxis=dict(
-                    range=[90,100],
-                )
-                )
+                legend=dict(
+                      orientation="h",  # 将legend改为横排放置
+                      yanchor="bottom",
+                      y=1.02,
+                      xanchor="right",
+                      x=1,
+                      font=dict(
+                          size=32, #22
+                          color='black',
+                      )
+                ),
+)
+
 fig.update_xaxes(showgrid=True,#将网格去掉
                  linewidth=1.5,
                  linecolor='black', # 将颜色设定为黑色
@@ -110,6 +86,6 @@ fig.update_yaxes(title='Accuracy(%)',
                  mirror=True,
                  gridcolor='#F2F2F2',
                  )
-html_path = os.path.join(h_path,"Noise.html")
-pio.write_image(fig,os.path.join(i_path,'Noise.eps'))
+html_path = os.path.join(h_path,"CompAverage.html")
+# pio.write_image(fig,os.path.join(i_path,'Noise.eps'))
 pyplot(fig,filename=html_path)
