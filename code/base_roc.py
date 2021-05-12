@@ -73,5 +73,5 @@ fig.update_layout(annotations=[
 fig.update_yaxes(scaleanchor="x", scaleratio=1)
 fig.update_xaxes(constrain='domain')
 html_path = os.path.join(h_path, "base_roc.html")
-pio.write_image(fig,os.path.join(i_path,'Noise.eps'))
+pio.write_image(fig,os.path.join(i_path,'base.eps'))
 pyplot(fig, filename=html_path)
