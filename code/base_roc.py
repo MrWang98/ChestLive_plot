@@ -1,17 +1,21 @@
 import os
 import numpy as np
 import plotly as py
+import plotly.io as pio
 import plotly.express as px
 import plotly.graph_objects as go
 from sklearn.metrics import roc_curve
 from sklearn.metrics import roc_auc_score
-
 pyplot = py.offline.plot
 
-if os.path.exists("../htmls"):
-    h_path="../htmls"
+if os.path.exists("../images"):
+    i_path="../images"
 else:
-    h_path="."
+    i_path="."
+if os.path.exists("../htmls"):
+    h_path = "../htmls"
+else:
+    h_path = "."
 
 font = {'family': 'Times new roman',
         'size': 24,
@@ -69,4 +73,5 @@ fig.update_layout(annotations=[
 fig.update_yaxes(scaleanchor="x", scaleratio=1)
 fig.update_xaxes(constrain='domain')
 html_path = os.path.join(h_path, "base_roc.html")
+pio.write_image(fig,os.path.join(i_path,'Noise.eps'))
 pyplot(fig, filename=html_path)
