@@ -111,5 +111,5 @@ fig.update_yaxes(title='Accuracy(%)',
                  gridcolor='#F2F2F2',
                  )
 html_path = os.path.join(h_path,"Noise.html")
-# pio.write_image(fig,os.path.join(i_path,'Noise.eps'))
+pio.write_image(fig,os.path.join(i_path,'Noise.eps'))
 pyplot(fig,filename=html_path)

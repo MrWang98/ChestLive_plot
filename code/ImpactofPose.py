@@ -118,5 +118,5 @@ fig.update_yaxes(title='Accuracy(%)',
                  gridcolor='#F2F2F2',
                  )
 html_path = os.path.join(h_path,"Pose.html")
-# pio.write_image(fig,os.path.join(i_path,'Pose.eps'))
+pio.write_image(fig,os.path.join(i_path,'Pose.eps'))
 pyplot(fig,filename=html_path)

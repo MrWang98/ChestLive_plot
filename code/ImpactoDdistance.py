@@ -122,5 +122,5 @@ fig.update_yaxes(title='Accuracy(%)',
                  titlefont=font,
                  )
 html_path = os.path.join(h_path,"Distance.html")
-# pio.write_image(fig,os.path.join(i_path,'Distance.eps'))
+pio.write_image(fig,os.path.join(i_path,'Distance.eps'))
 pyplot(fig,filename=html_path)

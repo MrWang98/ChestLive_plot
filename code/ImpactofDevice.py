@@ -76,5 +76,5 @@ fig.update_yaxes(title='Accuracy(%)',
 
 
 html_path = "../htmls/ImpactofDevice.html"
-# fig.write_image('../images/ImpactofDevice.eps')
+pio.write_image(fig,os.path.join(i_path,'Device.eps'))
 pyplot(fig,filename=html_path)

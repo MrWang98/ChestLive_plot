@@ -112,5 +112,5 @@ fig.update_yaxes(showgrid=True,
                  title='Accuracy(%)'
                  )
 html_path = os.path.join(h_path,"Direction.html")
-# pio.write_image(fig,os.path.join(i_path,'Direction.eps'))
+pio.write_image(fig,os.path.join(i_path,'Direction.eps'))
 pyplot(fig,filename=html_path)
