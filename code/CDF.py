@@ -61,17 +61,17 @@ for d,name,dash in zip(data,names,dashes):
         x=x,
         y=d,
         name=name,
+        mode='lines',
         line=dict(
+            # color='black',#线条颜色
             shape='hv',#线条先平画再竖直画
             dash=dash,#线条类型
-            width=6,
-        ),
-        # visible=False,
+            width=4,#线条粗细
+        )
     ))
 
 #设置参数
 fig.update_layout(
-                # showlegend=False,
                 height=630 ,width = 750,    #画布大小
                 font=dict(
                     family="Times New Roman",  # 所有标题文字的字体
@@ -87,12 +87,12 @@ fig.update_layout(
                               color='black',
                             )
                             ),
-                # xaxis=dict(
-                #     range=[0,x_range-1],
-                # ),
-                # yaxis=dict(
-                #     range=[0,1],
-                # )
+                yaxis=dict(
+                    range=[0,1],
+                ),
+                xaxis=dict(
+                    range=[0,x_range-1],
+                )
                 )
 fig.update_xaxes(showgrid=True,#将网格去掉
                  title='Times',
