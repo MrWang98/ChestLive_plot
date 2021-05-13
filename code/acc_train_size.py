@@ -82,13 +82,17 @@ data=np.array(data_pre)
 x=[i+1 for i in range(data.shape[1])]
 names=["User{}".format(i+1) for i in range(data.shape[0])]
 
+dashes=['dot', 'dash', 'longdash', 'dashdot', 'longdashdot'] #所有的线条类型
+
 fig = go.Figure()
-for d,name in zip(data,names):
+for d,name,dash in zip(data,names,dashes):
     fig.add_trace(go.Scatter(x=x,
-                            y=d,
-                            name=name,
-                            mode='lines',
-                            # showlegend=False,
+                             y=d,
+                             name=name,
+                             mode='lines',
+                             line=dict(
+                                 dash=dash,  # 线条类型
+                             )
                     ))
 
 #设置参数
