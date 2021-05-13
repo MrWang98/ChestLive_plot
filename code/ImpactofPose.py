@@ -52,6 +52,10 @@ for idx in idxs:
         average[v]=average[v]+data_pre[idx][v]
 average=[d/i for d in average]
 
+with open('average.csv','a') as f:
+    for avg in average:
+        f.write('{},'.format(avg))
+
 x = ['Sit on chair', 'Lying', 'Sit on sofa', 'Stand', 'Walk']
 names=['U{}'.format(i+1) for i in range(len(data))]
 

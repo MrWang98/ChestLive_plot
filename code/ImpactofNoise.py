@@ -17,7 +17,7 @@ else:
 
 #处理数据
 # names=['50db','55db','65db']
-file_name='CompAverage.csv'
+file_name='noise.csv'
 if os.path.exists("../data"):
     with open("../data/"+file_name) as f:
         text=f.readlines()
@@ -47,6 +47,10 @@ for idx in idxs:
     for v in range(data_pre.shape[1]):
         average[v] = average[v] + data_pre[idx][v]
 average = [d / i for d in average]
+
+with open('average.csv','a') as f:
+    for avg in average:
+        f.write('{},'.format(avg))
 
 names=['U{}'.format(i+1) for i in range(len(data))]
 x=['50db','55db','65db']
@@ -97,7 +101,7 @@ fig.update_layout(
                     range=[90,100],
                 )
                 )
-fig.update_xaxes(showgrid=True,#将网格去掉
+fig.update_xaxes(showgrid=True,
                  linewidth=1.5,
                  linecolor='black', # 将颜色设定为黑色
                  mirror=True,

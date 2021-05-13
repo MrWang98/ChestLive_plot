@@ -17,7 +17,7 @@ else:
 
 #处理数据
 # names=['50db','55db','65db']
-file_name='CompAverage.csv'
+file_name='Average.csv'
 if os.path.exists("../data"):
     with open("../data/"+file_name) as f:
         text=f.readlines()

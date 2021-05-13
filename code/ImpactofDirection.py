@@ -52,6 +52,10 @@ for idx in idxs:
         average[v] = average[v] + data_pre[idx][v]
 average = [d / i for d in average]
 
+with open('average.csv','a') as f:
+    for avg in average:
+        f.write('{},'.format(avg))
+
 r=50;g=110;b=90
 # colors=['rgb(57,116,94)','rgb(64,134,98)','rgb(83,149,103)']
 colors=['rgb({},{},{})'.format(r+(i+1)*8,g+(i+1)*18,b+(i+1)*6) for i in range(len(data))]

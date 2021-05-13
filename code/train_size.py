@@ -81,6 +81,8 @@ person=['HNC','ChenJiaShun','QinDang','OuRunMin','MMH2','XiaTong',
           'BianYaWei','ChenChangXin','HuangZhiHui','WuYuan','LiuSiYing',
           'ZJX','LTM','LiZuoLong','ZCY']
 
+
+
 data_pre=[]
 names=[]
 for line in text:
