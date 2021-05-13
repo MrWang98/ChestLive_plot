@@ -77,10 +77,11 @@ else:
     with open(file_name) as f:
         text=f.readlines()
 
-person=['HNC','ChenJiaShun','QinDang','OuRunMin','MMH2','XiaTong',
-          'BianYaWei','ChenChangXin','HuangZhiHui','WuYuan','LiuSiYing',
-          'ZJX','LTM','LiZuoLong','ZCY']
+# person=['HNC','ChenJiaShun','QinDang','OuRunMin','MMH2','XiaTong',
+#           'BianYaWei','ChenChangXin','HuangZhiHui','WuYuan','LiuSiYing',
+#           'ZJX','LTM','LiZuoLong','ZCY']
 
+person=['HNC','OuRunMin','WuYuan','LTM','LiZuoLong']
 
 
 data_pre=[]
@@ -97,15 +98,19 @@ for line in text:
                 t.append(float(d)*100)
         data_pre.append(t)
 
+
+
 data=np.array(data_pre)
 x=[i+1 for i in range(data.shape[1])]
+
+names=["User{}".format(i+1) for i in range(data.shape[0])]
 
 fig = go.Figure()
 for d,name in zip(data,names):
     fig.add_scatter(x=x,
                     y=d,
                     name=name,
-                    showlegend=False,
+                    # showlegend=False,
                     )
 
 #设置参数
@@ -118,6 +123,16 @@ fig.update_layout(
                 template='simple_white',
                 yaxis=dict(
                     range=[0,50],
+                ),
+                legend=dict(
+                    orientation="h",  # 将legend改为横排放置
+                    yanchor="bottom",
+                    y=1.02,
+                    xanchor="right",
+                    x=1,
+                    font=dict(
+                        size=32,  # 25
+                        color='black', )
                 ),
 )
 
