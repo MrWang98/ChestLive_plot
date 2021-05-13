@@ -27,7 +27,7 @@ else:
         text = eval(text)
 
 
-names = []
+
 x_range=5
 x=[i for i in range(x_range)]
 # x=[0]
@@ -36,7 +36,6 @@ x=[i for i in range(x_range)]
 data=[]
 person={}
 for key in text.keys():
-    names.append(key)
     person[key]={0:0}
     sum=0
     for n in text[key]:
@@ -53,7 +52,7 @@ for key in text.keys():
             person[key][t_k]=person[key][t_k-1]+person[key][t_k]
             t_y.append(person[key][t_k]/sum)
     data.append(t_y)
-
+names = ['User{}'.format(i+1) for i in range(len(data))]
 #画图
 dashes=['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot'] #所有的线条类型
 fig = go.Figure()
@@ -63,10 +62,11 @@ for d,name,dash in zip(data,names,dashes):
         y=d,
         name=name,
         line=dict(
-            shape='hv',
-            dash=dash,
+            shape='hv',#线条先平画再竖直画
+            dash=dash,#线条类型
+            width=6,
         ),
-        # point='',
+        # visible=False,
     ))
 
 #设置参数
@@ -77,16 +77,31 @@ fig.update_layout(
                     family="Times New Roman",  # 所有标题文字的字体
                     size = 32, # 所有标题文字的大小
                 ),
-                template='simple_white'
+                template='simple_white',
+                legend=dict(orientation="h",
+                            yanchor="bottom",
+                            y=1.02,
+                            xanchor="right",
+                            x=1,
+                            font=dict(
+                              color='black',
+                            )
+                            ),
+                # xaxis=dict(
+                #     range=[0,x_range-1],
+                # ),
+                # yaxis=dict(
+                #     range=[0,1],
+                # )
                 )
 fig.update_xaxes(showgrid=True,#将网格去掉
-                 # title=,
+                 title='Times',
                  linewidth=1.5,
                  linecolor='black', # 将颜色设定为黑色
                  mirror=True,
                  gridcolor='#F2F2F2',
                  )     # 加上这个  四周都是黑色  ，不加的话只有左下两条线黑色  （就是镜像过去）
-fig.update_yaxes(title='Accuracy(%)',
+fig.update_yaxes(title='CDF',
                  titlefont=dict(
                    size=36,
                  ),
