@@ -1,4 +1,5 @@
 import numpy as np
+import plotly.io as pio
 from sklearn.metrics import roc_curve
 from sklearn.metrics import roc_auc_score
 from matplotlib import pyplot as plt
@@ -8,14 +9,21 @@ import plotly.graph_objects as go
 import os
 pyplot = py.offline.plot
 
-with open("../data/attacker_result.txt") as f:
+
+
+if os.path.exists("../images"):
+    i_path="../images"
+else:
+    i_path="."
+if os.path.exists("../htmls"):
+    h_path = "../htmls"
+else:
+    h_path = "."
+
+file_name='attacker_result.txt'
+with open("../data/"+file_name) as f:
     text = f.read()
     text = eval(text)
-
-if os.path.exists("../htmls"):
-    h_path="../htmls"
-else:
-    h_path="."
 
 font = {'family': 'Times new roman',
         'size': 24,
@@ -60,15 +68,23 @@ for true_list,score_list,key in zip(true,score,keys):
         if flag1 & flag2:
             break
     EER = x2[idx]
+    fig.add_trace(
+        go.Scatter(
+            x=x2,
+            y=y2,
 
+        )
+    )
     fig = px.area(
         x=x2, y=y2,
         labels=dict(x='False Positive Rate', y='True Positive Rate'),
-        color='pink'
+        # color='pink'
     )
     fig.update_yaxes(scaleanchor="x", scaleratio=1)
     fig.update_xaxes(constrain='domain')
-    fig.update_layout(annotations=[
+    fig.update_layout(
+
+        annotations=[
         go.layout.Annotation(
             showarrow=False,
             text='AUC: {:.4f}<br>EER: {:.2f}%'.format(AUC_ROC, EER*100),
@@ -77,41 +93,24 @@ for true_list,score_list,key in zip(true,score,keys):
             font=dict(
                 size=22,
                 color="black"
-            )
-
-        )])
-    fig['layout'].update(
+            ),)],
         font_size=24.5,
         polar_radialaxis_ticksuffix='%',
         polar_angularaxis_rotation=90,
         showlegend=False,
         height=600, width=700,
         font=dict(
-            family="Time New Roman",  # 所有标题文字的字体
+            family="Times New Roman",  # 所有标题文字的字体
             size=23.5,  # 所有标题文字的大小
         ),
-        # grid=False
+        yaxis=dict(
+            range=[-0.04,1.04],
+        ),
+        xaxis=dict(
+            range=[-0.04,1.04],
+        ),
     )
-    # fig.show()
     html_path = os.path.join(h_path, "{}_attacker.html".format(key))
+    # pio.write_image(fig,os.path.join(i_path,"{}_attacker.eps".format(key)))
     pyplot(fig, filename=html_path)
-    # break
-
-    # r =plt.figure(figsize=(8,7))
-    # plt.plot(x2,y2,'-')
-    # plt.text(0.3, 0.2,'AUC: %0.4f\nEER: %0.4f' % (AUC_ROC, EER),fontsize=20)
-    # plt.fill_between(x2, y2, interpolate=True, color='pink', alpha=0.5)
-    # plt.xlabel("False Positive Rate",fontdict=font)
-    # plt.ylabel("True Positive Rate",fontdict=font)
-    # plt.yticks(fontproperties='Times New Roman', size=22, weight='ultralight')
-    # plt.xticks(fontproperties='Times New Roman', size=22, weight='ultralight')
-    # ax=plt.gca()
-    # ax.spines['bottom'].set_linewidth(1);  ###设置底部坐标轴的粗细
-    # ax.spines['left'].set_linewidth(1);  ####设置左边坐标轴的粗细
-    # ax.spines['right'].set_linewidth(1);  ###设置右边坐标轴的粗细
-    # ax.spines['top'].set_linewidth(1);  ####设置上部坐标轴的粗细
-    # out_fig = plt.gcf()
-    # out_fig.savefig("../images/{}_attacker.eps".format(key),format="eps",dpi=1000)
-    # plt.show()
-    # break
 
