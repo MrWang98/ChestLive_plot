@@ -134,7 +134,7 @@ fig.update_yaxes(title='CDF',
                  gridcolor='#F2F2F2',
                  )
 html_path = os.path.join(h_path,"CDF.html")
-# pio.write_image(fig,os.path.join(i_path,'Arouse.eps'))
+pio.write_image(fig,os.path.join(i_path,'CDF.eps'))
 pyplot(fig,filename=html_path)
 
 print()
