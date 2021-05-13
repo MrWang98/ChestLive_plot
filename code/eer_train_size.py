@@ -95,10 +95,10 @@ l=len(data_pre)
 for idx in range(20):
     average[idx]=average[idx]/len(data_pre)
 
-person=['HNC','ChenJiaShun','QinDang','OuRunMin','MMH2','XiaTong',
-          'BianYaWei','ChenChangXin','HuangZhiHui','WuYuan','LiuSiYing',
-          'ZJX','LTM','LiZuoLong','ZCY']
-# person=['HNC','OuRunMin','WuYuan','LTM','LiZuoLong']
+# person=['HNC','ChenJiaShun','QinDang','OuRunMin','MMH2','XiaTong',
+#           'BianYaWei','ChenChangXin','HuangZhiHui','WuYuan','LiuSiYing',
+#           'ZJX','LTM','LiZuoLong','ZCY']
+person=['HNC','OuRunMin','WuYuan','LTM','LiZuoLong']
 
 data_pre=[]
 names=[]
@@ -117,7 +117,7 @@ for line in text:
 data=np.array(data_pre)
 x=[i+1 for i in range(data.shape[1])]
 
-# names=["User{}".format(i+1) for i in range(data.shape[0])]
+names=["User{}".format(i+1) for i in range(data.shape[0])]
 
 fig = go.Figure()
 for d,name in zip(data,names):
