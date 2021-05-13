@@ -64,6 +64,8 @@ else:
 
 person=['HNC','OuRunMin','WuYuan','LTM','LiZuoLong']
 
+
+average=[0 for i in range(20)]
 data_pre=[]
 names=[]
 for line in text:
@@ -71,12 +73,15 @@ for line in text:
     if line[0] in person:
         t = []
         names.append(line[0])
-        for d in line[1:]:
+        for idx,d in enumerate(line[1:]):
             if d=='':
                 t.append(0)
             else:
                 t.append(float(d)*100)
+                average[idx] += float(d) * 100
         data_pre.append(t)
+for idx in range(20):
+    average[idx]=average[idx]/len(data_pre)
 
 data=np.array(data_pre)
 x=[i+1 for i in range(data.shape[1])]
@@ -94,7 +99,10 @@ for d,name,dash in zip(data,names,dashes):
                                  dash=dash,  # 线条类型
                              )
                     ))
-
+fig.add_scatter(x=x,
+                y=average,
+                name='Overall',
+                )
 #设置参数
 fig.update_layout(
                 height=500 ,width = 650,
