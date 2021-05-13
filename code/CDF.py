@@ -30,6 +30,7 @@ else:
 
 x_range=5
 x=[i for i in range(x_range)]
+average=[0 for i in range(x_range)]
 # x=[0]
 # for i in range(1,x_range):
 #     x.append(i);x.append(i)
@@ -46,12 +47,18 @@ for key in text.keys():
             person[key][n+1]+=1
     t_y=[0]
     for t_k in range(1,x_range):
-        if t_k not  in person[key]:
+        if t_k not in person[key]:
             t_y.append(float(1))
+            average[t_k]+=1
         else:
             person[key][t_k]=person[key][t_k-1]+person[key][t_k]
+            average[t_k]+=person[key][t_k]/sum
             t_y.append(person[key][t_k]/sum)
     data.append(t_y)
+
+for i in range(len(average)):
+    average[i]=average[i]/len(data)
+
 names = ['User{}'.format(i+1) for i in range(len(data))]
 #画图
 dashes=['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot'] #所有的线条类型
@@ -61,6 +68,19 @@ for d,name,dash in zip(data,names,dashes):
         x=x,
         y=d,
         name=name,
+        mode='lines',
+        line=dict(
+            # color='black',#线条颜色
+            shape='hv',#线条先平画再竖直画
+            dash=dash,#线条类型
+            width=4,#线条粗细
+        )
+    ))
+
+fig.add_trace(go.Scatter(
+        x=x,
+        y=average,
+        name='Overall',
         mode='lines',
         line=dict(
             # color='black',#线条颜色
@@ -92,6 +112,8 @@ fig.update_layout(
                 ),
                 xaxis=dict(
                     range=[0,x_range-1],
+                    tickmode = 'array',
+                    tickvals = list(range(x_range)),
                 )
                 )
 fig.update_xaxes(showgrid=True,#将网格去掉
