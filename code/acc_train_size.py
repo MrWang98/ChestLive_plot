@@ -67,11 +67,11 @@ person=['HNC','OuRunMin','WuYuan','LTM','LiZuoLong']
 data_pre=[]
 names=[]
 for line in text:
-    line=line.split(',')
+    line=line.replace('\n','').split(',')
     if line[0] in person:
         t = []
         names.append(line[0])
-        for d in line[1:-1]:
+        for d in line[1:]:
             if d=='':
                 t.append(0)
             else:

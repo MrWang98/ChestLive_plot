@@ -77,33 +77,47 @@ else:
     with open(file_name) as f:
         text=f.readlines()
 
-# person=['HNC','ChenJiaShun','QinDang','OuRunMin','MMH2','XiaTong',
-#           'BianYaWei','ChenChangXin','HuangZhiHui','WuYuan','LiuSiYing',
-#           'ZJX','LTM','LiZuoLong','ZCY']
+average=[0 for i in range(20)]
+data_pre=[]
+names=[]
+for line in text:
+    line=line.replace('\n','').split(',')
+    t = []
+    names.append(line[0])
+    for idx,d in enumerate(line[1:]):
+        if d=='':
+            t.append(0)
+        else:
+            t.append(float(d)*100)
+            average[idx]+=float(d)*100
+    data_pre.append(t)
+l=len(data_pre)
+for idx in range(20):
+    average[idx]=average[idx]/len(data_pre)
 
-person=['HNC','OuRunMin','WuYuan','LTM','LiZuoLong']
-
+person=['HNC','ChenJiaShun','QinDang','OuRunMin','MMH2','XiaTong',
+          'BianYaWei','ChenChangXin','HuangZhiHui','WuYuan','LiuSiYing',
+          'ZJX','LTM','LiZuoLong','ZCY']
+# person=['HNC','OuRunMin','WuYuan','LTM','LiZuoLong']
 
 data_pre=[]
 names=[]
 for line in text:
-    line=line.split(',')
+    line=line.replace('\n','').split(',')
     if line[0] in person:
         t = []
         names.append(line[0])
-        for d in line[1:-1]:
+        for idx,d in enumerate(line[1:]):
             if d=='':
                 t.append(0)
             else:
                 t.append(float(d)*100)
         data_pre.append(t)
 
-
-
 data=np.array(data_pre)
 x=[i+1 for i in range(data.shape[1])]
 
-names=["User{}".format(i+1) for i in range(data.shape[0])]
+# names=["User{}".format(i+1) for i in range(data.shape[0])]
 
 fig = go.Figure()
 for d,name in zip(data,names):
@@ -112,10 +126,13 @@ for d,name in zip(data,names):
                     name=name,
                     # showlegend=False,
                     )
-
+fig.add_scatter(x=x,
+                y=average,
+                name='Overall',
+                )
 #设置参数
 fig.update_layout(
-                height=520 ,width = 1000,
+                height=500 ,width = 1000,
                 font=dict(
                     family="Times New Roman",  # 所有标题文字的字体
                     size = 32, # 所有标题文字的大小
@@ -124,16 +141,19 @@ fig.update_layout(
                 yaxis=dict(
                     range=[0,50],
                 ),
-                legend=dict(
-                    orientation="h",  # 将legend改为横排放置
-                    yanchor="bottom",
-                    y=1.02,
-                    xanchor="right",
-                    x=1,
-                    font=dict(
-                        size=32,  # 25
-                        color='black', )
+                xaxis=dict(
+                  range=[0,20],
                 ),
+                # legend=dict(
+                #     orientation="h",  # 将legend改为横排放置
+                #     yanchor="bottom",
+                #     y=1.02,
+                #     xanchor="right",
+                #     x=1,
+                #     font=dict(
+                #         size=32,  # 25
+                #         color='black', )
+                # ),
 )
 
 fig.update_xaxes(showgrid=True,#将网格去掉
