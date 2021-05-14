@@ -55,7 +55,7 @@ fig.add_trace(go.Scatter(x=x2,
                          fill='tozeroy',
                          fillcolor='rgb(255,209,196)',
                          line=dict(width=3,
-                                   color='rgb(247,143,116)',)
+                                   color='rgba(247,143,116,0.5)',)
                         ))
 
 

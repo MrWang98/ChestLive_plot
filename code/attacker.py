@@ -47,7 +47,7 @@ for key in text.keys():
         true.append(true_list)
         score.append(score_list)
 
-fillcolors=['rgb(164,173,248)','rgb(255,209,196)','rgb(190,230,219)']
+fillcolors=['rgba(164,173,248,0.5)','rgba(255,209,196,0.5)','rgba(190,230,219,0.5)']
 linecolors=['rgb(99,110,250)','rgb(247,143,116)','rgb(130,187,172)']
 
 
@@ -83,7 +83,7 @@ for true_list,score_list,key,fillcolor,linecolor in zip(true,score,keys,fillcolo
 
             line=dict(
                 color=linecolor,
-                width=3,
+                width=4,
             )
         )
     )
