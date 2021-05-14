@@ -47,7 +47,11 @@ for key in text.keys():
         true.append(true_list)
         score.append(score_list)
 
-for true_list,score_list,key in zip(true,score,keys):
+fillcolors=['rgb(164,173,248)','rgb(255,209,196)','rgb(190,230,219)']
+linecolors=['rgb(99,110,250)','rgb(247,143,116)','rgb(130,187,172)']
+
+
+for true_list,score_list,key,fillcolor,linecolor in zip(true,score,keys,fillcolors,linecolors):
     y_true = np.array(true_list)
     y_score = np.array(score_list)
     x2, y2, thresholds = roc_curve(y_true, y_score)
@@ -68,20 +72,32 @@ for true_list,score_list,key in zip(true,score,keys):
         if flag1 & flag2:
             break
     EER = x2[idx]
+
+    fig = go.Figure()
     fig.add_trace(
         go.Scatter(
             x=x2,
             y=y2,
+            fill='tozeroy',
+            fillcolor=fillcolor,
 
+            line=dict(
+                color=linecolor,
+                width=5,
+            )
         )
     )
-    fig = px.area(
-        x=x2, y=y2,
-        labels=dict(x='False Positive Rate', y='True Positive Rate'),
-        # color='pink'
-    )
-    fig.update_yaxes(scaleanchor="x", scaleratio=1)
-    fig.update_xaxes(constrain='domain')
+    # fig = px.area(
+    #     x=x2, y=y2,
+    #     labels=dict(x='False Positive Rate', y='True Positive Rate'),
+    #     width=1000,
+    #     # color='pink'
+    # )
+    fig.update_yaxes(scaleanchor="x",
+                     scaleratio=1,
+                     title='True Positive Rate')
+    fig.update_xaxes(constrain='domain',
+                     title='False Positive Rate',)
     fig.update_layout(
 
         annotations=[
@@ -113,4 +129,5 @@ for true_list,score_list,key in zip(true,score,keys):
     html_path = os.path.join(h_path, "{}_attacker.html".format(key))
     # pio.write_image(fig,os.path.join(i_path,"{}_attacker.eps".format(key)))
     pyplot(fig, filename=html_path)
+    print()
 

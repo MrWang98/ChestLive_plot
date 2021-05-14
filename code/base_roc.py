@@ -66,7 +66,7 @@ fig.update_layout(annotations=[
                     showlegend=False,
                     height=600, width=700,
                     font=dict(
-                    family="Time New Roman",  # 所有标题文字的字体
+                    family="Times New Roman",  # 所有标题文字的字体
                     size=23.5,  # 所有标题文字的大小
                     ),
 )
