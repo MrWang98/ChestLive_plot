@@ -77,23 +77,30 @@ else:
     with open(file_name) as f:
         text=f.readlines()
 
-average=[0 for i in range(20)]
-data_pre=[]
-names=[]
-for line in text:
-    line=line.replace('\n','').split(',')
-    t = []
-    names.append(line[0])
-    for idx,d in enumerate(line[1:]):
-        if d=='':
-            t.append(0)
-        else:
-            t.append(float(d)*100)
-            average[idx]+=float(d)*100
-    data_pre.append(t)
-l=len(data_pre)
-for idx in range(20):
-    average[idx]=average[idx]/len(data_pre)
+with open('../data/log_EER_size.csv','w') as f:
+    average=[0 for i in range(20)]
+    data_pre=[]
+    names=[]
+    for line in text:
+        line=line.replace('\n','').split(',')
+        t = []
+        names.append(line[0])
+        f.write(line[0]+',')
+        for idx,d in enumerate(line[1:]):
+            if d=='':
+                t.append(0)
+                f.write(str(0)+',')
+            else:
+                t.append(float(d)*100)
+                f.write(str(float(d)*100)+',')
+                average[idx]+=float(d)*100
+        data_pre.append(t)
+        f.write('\n')
+    l=len(data_pre)
+    f.write('Overall'+',')
+    for idx in range(20):
+        average[idx]=average[idx]/len(data_pre)
+        f.write(str(average[idx])+',')
 
 # person=['HNC','ChenJiaShun','QinDang','OuRunMin','MMH2','XiaTong',
 #           'BianYaWei','ChenChangXin','HuangZhiHui','WuYuan','LiuSiYing',
