@@ -47,7 +47,7 @@ for key in text.keys():
         true.append(true_list)
         score.append(score_list)
 
-fillcolors=['rgba(164,173,248,0.5)','rgba(255,209,196,0.5)','rgba(190,230,219,0.5)']
+fillcolors=['rgba(164,173,248,0.7)','rgba(255,209,196,0.7)','rgba(201,228,219,0.7)']
 linecolors=['rgb(99,110,250)','rgb(247,143,116)','rgb(130,187,172)']
 
 
