@@ -83,7 +83,7 @@ for true_list,score_list,key,fillcolor,linecolor in zip(true,score,keys,fillcolo
 
             line=dict(
                 color=linecolor,
-                width=5,
+                width=3,
             )
         )
     )
@@ -95,9 +95,9 @@ for true_list,score_list,key,fillcolor,linecolor in zip(true,score,keys,fillcolo
     # )
     fig.update_yaxes(scaleanchor="x",
                      scaleratio=1,
-                     title='True Positive Rate')
+                     title='True positive rate')
     fig.update_xaxes(constrain='domain',
-                     title='False Positive Rate',)
+                     title='False positive rate',)
     fig.update_layout(
 
         annotations=[
@@ -129,5 +129,4 @@ for true_list,score_list,key,fillcolor,linecolor in zip(true,score,keys,fillcolo
     html_path = os.path.join(h_path, "{}_attacker.html".format(key))
     # pio.write_image(fig,os.path.join(i_path,"{}_attacker.eps".format(key)))
     pyplot(fig, filename=html_path)
-    print()
 

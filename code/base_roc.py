@@ -48,9 +48,16 @@ for j1 in range(l):
             idx=j2
 EER = x2[idx]
 
-fig = px.area(x=x2, y=y2,
-              labels=dict(x='False Positive Rate', y='True Positive Rate'),
-              )
+
+fig=go.Figure()
+fig.add_trace(go.Scatter(x=x2,
+                         y=y2,
+                         fill='tozeroy',
+                         fillcolor='rgb(255,209,196)',
+                         line=dict(width=3,
+                                   color='rgb(247,143,116)',)
+                        ))
+
 
 fig.update_layout(annotations=[
                         go.layout.Annotation(
@@ -59,19 +66,26 @@ fig.update_layout(annotations=[
                             x=0.5,
                             y=0.1,
                             font=dict(
-                                size=22,
+                                size=18,
                                 color="black"
                             )
                         )],
                     showlegend=False,
-                    height=600, width=700,
+                    height=450, width=500,
                     font=dict(
                     family="Times New Roman",  # 所有标题文字的字体
-                    size=23.5,  # 所有标题文字的大小
+                    size=20,  # 所有标题文字的大小
+                    ),
+                    yaxis=dict(
+                        range=[-0.04,1.04],
+                    ),
+                    xaxis=dict(
+                        range=[-0.04,1.04],
+                        dtick=0.2,
                     ),
 )
-fig.update_yaxes(scaleanchor="x", scaleratio=1)
-fig.update_xaxes(constrain='domain')
+fig.update_yaxes(scaleanchor="x", scaleratio=1,title='True positive rate')
+fig.update_xaxes(constrain='domain',title='False positive rate')
 html_path = os.path.join(h_path, "base_roc.html")
-pio.write_image(fig,os.path.join(i_path,'base.eps'))
+# pio.write_image(fig,os.path.join(i_path,'base.eps'))
 pyplot(fig, filename=html_path)
