@@ -16,7 +16,7 @@ if os.path.exists("../htmls"):
 else:
     h_path = "."
 
-file_name='result_47.txt'
+file_name='result_24.txt'
 if os.path.exists("../data"):
     with open("../data/"+file_name) as f:
         text=f.read()
@@ -53,33 +53,34 @@ with open('../data/FRR.csv','w') as f:
 
 average=average/count
 
-
+person=['XiaTong','OuRunMin','GQY','ZJX','XuLian','LengChao']
 # marker_shapes=['triangle-up-open','diamond-tall-open','circle-open','x-thin-open','y-up-open']
 # line_shapes=[ 'dot', 'dash', 'longdash', 'dashdot','solid', 'longdashdot']
-
+names=['User{}'.format(i) for i in range(len(person))]
 fig = go.Figure()
-for name in all.keys():
-    fig.add_trace(go.Bar(y=all[key],
-                    name=key,
+for p,name in zip(person,names):
+    fig.add_trace(go.Bar(y=[all[p]*100],
+                    x=[name],
                     ))
-fig.add_trace(go.Bar(y=average,
-                     name='Overall',
+fig.add_trace(go.Bar(y=[average*100],
+                     x=['Overall'],
                      ))
 #设置参数
 fig.update_layout(
-                height=500 ,width = 1000,
+                height=500 ,width = 750,
                 font=dict(
                     family="Times New Roman",  # 所有标题文字的字体
                     size = 32, # 所有标题文字的大小
                 ),
                 template='simple_white',
+                # xaxis=dict(
+                #     angle=45,
+                # ),
                 yaxis=dict(
-                    range=[0,50],
+                    dtick=0.2,
+                    range=[0,2],
                 ),
-                xaxis=dict(
-                    range=[0,20],
-                    dtick=1,
-                ),
+                showlegend=False,
                 legend=dict(
                     orientation="h",  # 将legend改为横排放置
                     yanchor="bottom",
@@ -98,7 +99,7 @@ fig.update_xaxes(showgrid=True,#将网格去掉
                  mirror=True,
                  gridcolor='#F2F2F2',
                  )     # 加上这个  四周都是黑色  ，不加的话只有左下两条线黑色  （就是镜像过去）
-fig.update_yaxes(title='EER(%)',
+fig.update_yaxes(title='FRR(%)',
                  showgrid=True,
                  linewidth=1.5,
                  linecolor='black',
