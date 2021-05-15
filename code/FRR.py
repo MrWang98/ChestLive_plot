@@ -106,6 +106,6 @@ fig.update_yaxes(title='FRR(%)',
                  mirror=True,
                  gridcolor='#F2F2F2',
                  )
-html_path = os.path.join(h_path,"EERs.html")
-# pio.write_image(fig,os.path.join(i_path,'EERs.eps'))
+html_path = os.path.join(h_path,"FRR.html")
+# pio.write_image(fig,os.path.join(i_path,'FRR.eps'))
 pyplot(fig,filename=html_path)

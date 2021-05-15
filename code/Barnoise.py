@@ -55,11 +55,32 @@ x=['50dB','55dB','65dB']
 # colors=['rgb(126,20,86)','rgb(61,19,101)','rgb(0,19,114)','rgb(4,80,140)',
 #         'rgb(0,135,147)','rgb(5,128,21)','rgb(96,150,4)','rgb(210,204,3)']
 
-colors=['rgb(142,76,140)','rgb(101,72,140)','rgb(36,48,130)','rgb(4,80,150)',
-        'rgb(0,135,147)','rgb(5,128,21)','rgb(96,150,4)','rgb(210,204,3)']
+# colors=['rgb(142,76,140)','rgb(101,72,140)','rgb(36,48,130)','rgb(4,80,150)',
+#          'rgb(0,135,147)','rgb(5,128,21)','rgb(96,150,4)','rgb(210,204,3)']
+
+# colors=['rgb(0,146,211)','rgb(35,183,166)','rgb(18,148,56)','rgb(132,174,47)',
+#         'rgb(211,194,8)','rgb(220,158,88)','rgb(222,133,31)','rgb(214,90,24)']
+
+colors=['rgba(0,146,211,0.5)','rgba(35,183,166,0.5)','rgba(18,148,56,0.5)','rgba(132,174,47,0.5)',
+        'rgba(211,194,8,0.5)','rgba(220,158,88,0.5)','rgba(222,133,31,0.5)','rgba(214,90,24,0.5)']
+
+# colors=['rgb(3,182,205)','rgb(201,222,47)','rgb(255,177,6)']
+
+# colors=['rgba(22,173,66,0.5)','rgba(147,197,46,0.5)','rgba(243,223,6,0.5)']
 
 #画图
 fig = go.Figure()
+# for d,name,i in zip(data,names,range(len(data))):
+#     fig.add_trace(go.Bar(
+#                         x=x,
+#                         y=d,
+#                         name=name,
+#                         showlegend=True,
+#                         marker=dict(
+#                             color=colors[i%3],
+#                         )
+#                         # boxpoints='all',
+#                         ))
 for d,name,color in zip(data,names,colors):
     fig.add_trace(go.Bar(
                         x=x,
