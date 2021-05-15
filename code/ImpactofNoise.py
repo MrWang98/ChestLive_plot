@@ -53,7 +53,7 @@ with open('average.csv','a') as f:
         f.write('{},'.format(avg))
 
 names=['U{}'.format(i+1) for i in range(len(data))]
-x=['50db','55db','65db']
+x=['50dB','55dB','65dB']
 
 r=50;g=110;b=90
 colors=['rgb({},{},{})'.format(r+(i+1)*8,g+(i+1)*18,b+(i+1)*6) for i in range(len(data))]

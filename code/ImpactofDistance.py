@@ -15,24 +15,29 @@ else:
     h_path = "."
 
 #处理数据
-file_name='distance.csv'
+file_name='distance2.csv'
 if os.path.exists("../data"):
     with open("../data/"+file_name) as f:
         text=f.readlines()
 else:
     with open(file_name) as f:
         text=f.readlines()
+x=['5','10','15','20','25','30']
 data_pre=[]
-average=[]
+names=[]
+average=[0 for i in range(len(x))]
 for line in text:
     t=[]
-    line=line.split(',')
-    for d in line:
-        if d == '':
-            pass
-        else:
-            t.append(float(d) * 100)
+    line=line.replace('\n','').split(',')
+    names.append(line[0])
+    for idx,d in enumerate(line[1:]):
+        t.append(float(d) * 100)
+        average[idx]+=float(d)*100
     data_pre.append(t)
+data=data_pre
+
+for i in range(len(average)):
+    average[i]=average[i]/len(data)
 
 # data=[[],[],[]]
 # for i,line in enumerate(data_pre):
@@ -42,24 +47,24 @@ for line in text:
 # names=['5','10','15','20','25','30']
 # x=['U{}'.format(i+1) for i in range(len(data[0][:]))]
 
-idxs=[0,2,3,4,10,12,14,17]
-data_pre=np.array(data_pre).T
-average=[0 for i in range(data_pre.shape[1])]
-data=[]
-i=0
-for idx in idxs:
-    data.append(data_pre[idx][:])
-    i = i + 1
-    for v in range(data_pre.shape[1]):
-        average[v] = average[v] + data_pre[idx][v]
-average = [d / i for d in average]
+# idxs=[0,2,3,4,10,12,14,17]
+# data_pre=np.array(data_pre).T
+# average=[0 for i in range(data_pre.shape[1])]
+# data=[]
+# i=0
+# for idx in idxs:
+#     data.append(data_pre[idx][:])
+#     i = i + 1
+#     for v in range(data_pre.shape[1]):
+#         average[v] = average[v] + data_pre[idx][v]
+# average = [d / i for d in average]
+#
+# with open('average.csv','a') as f:
+#     for avg in average:
+#         f.write('{},'.format(avg))
 
-with open('average.csv','a') as f:
-    for avg in average:
-        f.write('{},'.format(avg))
+# names=['U{}'.format(i+1) for i in range(len(data))]
 
-names=['U{}'.format(i+1) for i in range(len(data))]
-x=['5','10','15','20','25','30']
 
 r=50;g=110;b=90
 colors=['rgb({},{},{})'.format(r+(i+1)*8,g+(i+1)*18,b+(i+1)*6) for i in range(len(data))]
@@ -83,15 +88,11 @@ fig.add_scatter(x=x,
                 )
                 )
 #设置参数
-font=dict(
-    family="Time New Roman",  # 所有标题文字的字体
-    size = 32, # 所有标题文字的大小
-)
 fig.update_layout(
                 # showlegend=False,
                 height=520 ,width = 620,
                 font=dict(
-                    family="Time New Roman",  # 所有标题文字的字体
+                    family="Times New Roman",  # 所有标题文字的字体
                     size = 32, # 所有标题文字的大小
                 ),
                 template='simple_white',
@@ -126,5 +127,5 @@ fig.update_yaxes(title='Accuracy(%)',
                  titlefont=font,
                  )
 html_path = os.path.join(h_path,"Distance.html")
-pio.write_image(fig,os.path.join(i_path,'Distance.eps'))
+# pio.write_image(fig,os.path.join(i_path,'Distance.eps'))
 pyplot(fig,filename=html_path)

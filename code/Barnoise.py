@@ -50,10 +50,13 @@ for idx in idxs:
 average = [d / i for d in average]
 
 names=['User{}'.format(i+1) for i in range(len(data))]
-x=['50db','55db','65db']
+x=['50dB','55dB','65dB']
 
-r=50;g=110;b=90
-colors=['rgb({},{},{})'.format(r+(i+1)*8,g+(i+1)*18,b+(i+1)*6) for i in range(len(data))]
+# colors=['rgb(126,20,86)','rgb(61,19,101)','rgb(0,19,114)','rgb(4,80,140)',
+#         'rgb(0,135,147)','rgb(5,128,21)','rgb(96,150,4)','rgb(210,204,3)']
+
+colors=['rgb(142,76,140)','rgb(101,72,140)','rgb(36,48,130)','rgb(4,80,150)',
+        'rgb(0,135,147)','rgb(5,128,21)','rgb(96,150,4)','rgb(210,204,3)']
 
 #画图
 fig = go.Figure()
@@ -118,5 +121,5 @@ fig.update_layout(barmode='group',
                   )
 
 html_path = os.path.join(h_path,"ImpactofNoise.html")
-pio.write_image(fig,os.path.join(i_path,'ImpactofNoise.eps'))
+# pio.write_image(fig,os.path.join(i_path,'ImpactofNoise.eps'))
 pyplot(fig,filename=html_path)

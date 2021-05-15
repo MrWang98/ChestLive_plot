@@ -126,17 +126,38 @@ x=[i+1 for i in range(data.shape[1])]
 
 names=["User{}".format(i+1) for i in range(data.shape[0])]
 
+marker_shapes=['triangle-up-open','diamond-tall-open','circle-open','x-thin-open','y-up-open']
+line_shapes=[ 'dot', 'dash', 'longdash', 'dashdot','solid', 'longdashdot']
+
 fig = go.Figure()
-for d,name in zip(data,names):
-    fig.add_scatter(x=x,
+for d,name,marker_shape,line_shape in zip(data,names,marker_shapes,line_shapes):
+    fig.add_trace(go.Scatter(x=x,
                     y=d,
                     name=name,
-                    # showlegend=False,
+                    mode='lines+markers',
+                    marker=dict(
+                        size=15,
+                      symbol=marker_shape,
+                    ),
+                    line=dict(
+                        # dash=line_shape,
+                        width=3
                     )
-fig.add_scatter(x=x,
-                y=average,
-                name='Overall',
-                )
+                    # showlegend=False,
+                    ))
+fig.add_trace(go.Scatter(x=x,
+                         y=average,
+                         name='Overall',
+                         mode='lines+markers',
+                         marker=dict(
+                             size=10,
+                             symbol='line-ns-open',
+                         ),
+                         line=dict(
+                             # dash=line_shape,
+                             width=3
+                         )
+                ))
 #设置参数
 fig.update_layout(
                 height=500 ,width = 1000,
@@ -149,18 +170,19 @@ fig.update_layout(
                     range=[0,50],
                 ),
                 xaxis=dict(
-                  range=[0,20],
+                    range=[0,20],
+                    dtick=1,
                 ),
-                # legend=dict(
-                #     orientation="h",  # 将legend改为横排放置
-                #     yanchor="bottom",
-                #     y=1.02,
-                #     xanchor="right",
-                #     x=1,
-                #     font=dict(
-                #         size=32,  # 25
-                #         color='black', )
-                # ),
+                legend=dict(
+                    orientation="h",  # 将legend改为横排放置
+                    yanchor="bottom",
+                    y=1.02,
+                    xanchor="right",
+                    x=1,
+                    font=dict(
+                        size=32,  # 25
+                        color='black', )
+                ),
 )
 
 fig.update_xaxes(showgrid=True,#将网格去掉

@@ -16,23 +16,26 @@ else:
     h_path = "."
 
 #处理数据
-file_name='distance.csv'
+file_name='distance2.csv'
 if os.path.exists("../data"):
     with open("../data/"+file_name) as f:
         text=f.readlines()
 else:
     with open(file_name) as f:
         text=f.readlines()
+names=[]
 data_pre=[]
 average=[]
 for line in text:
     t=[]
-    line=line.split(',')
-    for d in line:
+    line=line.replace('\n').split(',')
+    names.append(line[0])
+    for idx,d in enumerate(line[1:]):
         if d == '':
             pass
         else:
             t.append(float(d) * 100)
+
     data_pre.append(t)
 
 # data=[[],[],[]]
@@ -43,6 +46,7 @@ for line in text:
 # names=['5','10','15','20','25','30']
 # x=['U{}'.format(i+1) for i in range(len(data[0][:]))]
 
+x=['5','10','15','20','25','30']
 idxs=[0,2,3,4,10,12,14,17]
 data_pre=np.array(data_pre).T
 average=[0 for i in range(data_pre.shape[1])]
@@ -56,7 +60,6 @@ for idx in idxs:
 average = [d / i for d in average]
 
 names=['User{}'.format(i+1) for i in range(len(data))]
-x=['5','10','15','20','25','30']
 
 r=50;g=110;b=90
 colors=['rgb({},{},{})'.format(r+(i+1)*8,g+(i+1)*18,b+(i+1)*6) for i in range(len(data))]

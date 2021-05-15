@@ -34,41 +34,47 @@ for item in text.items():
     #     f.write("{},{}\n".format(item[0],item[1]))
 l=len(z)
 
-# idx=[range(0,15),range(15,31),range(31,l)]
-idx=[range(0,15)]
+# idxs=[range(0,15),range(15,31),range(31,l)]
+idxs=[range(0,15)]
 
-for j,r in enumerate(idx):
+for j,r in enumerate(idxs):
 
     fig = go.Figure()
 
     for i in r:
-        trace0=go.Barpolar(
+        fig.add_trace(go.Barpolar(
             r=[z[i]],
             theta=['U{}'.format(i+1)],
-            marker_color='rgb(196,218,230)',
-        )
-        fig.add_trace(trace0)
-
-    # fig.update_layout(
-    #     font_size=24.5,
-    #     polar_radialaxis_ticksuffix='%',
-    #     polar_angularaxis_rotation=90,
-    #     showlegend=False,
-    # )
-
-    fig["layout"]["xaxis"].update({"title": "Authenticate result","titlefont": {"size": 28}})
-    fig["layout"]["yaxis"].update({"title": "Ground truth","titlefont": {"size": 28}})
-    fig['layout'].update(
-        font_size=24.5,
-        polar_radialaxis_ticksuffix='%',
-        polar_angularaxis_rotation=90,
+            # marker_color='rgba(196,218,230,0.7)',
+            marker_color='rgba(164,183,195,0.7)',
+        ))
+    fig.update_layout(
+        # polar_radialaxis_ticksuffix='%',
+        # polar_angularaxis_rotation=90,
         showlegend=False,
         height=600 ,width = 650,
         font=dict(
-            family="Time New Roman",  # 所有标题文字的字体
+            family="Times New Roman",  # 所有标题文字的字体
             size = 23.5, # 所有标题文字的大小
         ),
-        # grid=False
+
+        polar=dict(radialaxis=dict(gridwidth=0.5,
+                                   ticksuffix='%',
+                                   # showline=False,
+                                   showticklabels=True,
+                                   # linecolor='rgb(76,79,83)',
+                                   linecolor="rgb(198,206,217)",
+                                   # ticks='outside',
+                                   # tickcolor='red',
+                                   # ticklen=10,
+                                   angle=90,
+                                   # gridcolor="rgb(180,186,195)"),
+                                   gridcolor='rgb(76,79,83)',
+                                   ),
+                   angularaxis=dict(rotation=90,
+                                    # width='',
+                                    )
+        )
     )
     html_path = os.path.join(h_path,"AuthenticationRate{}.html".format(j))
     # pio.write_image(fig,os.path.join(i_path,'AuthenticationRate{}.eps'.format(j)))
