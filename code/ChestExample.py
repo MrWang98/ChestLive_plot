@@ -227,6 +227,16 @@ fig.update_layout(
 
     ]
 )
+
+fig.update_layout(font=dict(
+        family="Times New Roman",  # 所有标题文字的字体
+    ),)
+fig.update_xaxes(showgrid=True,
+                 gridcolor='#dbddde',
+                 )     # 加上这个  四周都是黑色  ，不加的话只有左下两条线黑色  （就是镜像过去）
+fig.update_yaxes(showgrid=True,
+                 gridcolor='#dbddde',
+                 )
 fig.update_annotations(startarrowsize=20)
 fig.update_annotations(arrowcolor='#194568')
 #fig.update_annotations(arrowcolor='#7b8b6f')

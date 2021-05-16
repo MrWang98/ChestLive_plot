@@ -66,6 +66,15 @@ fig["layout"]["yaxis"].update({"title": "Origin","titlefont": {"size": 30}})
 fig["layout"]["yaxis2"].update({"title": "Ewt-C1","titlefont": {"size": 30}})
 fig["layout"]["yaxis3"].update({"title": "Ewt-C2","titlefont": {"size": 30}})
 fig["layout"]["yaxis4"].update({"title": "Ewt-C3","titlefont": {"size": 30}})
+fig.update_layout(font=dict(
+        family="Times New Roman",  # 所有标题文字的字体
+    ),)
+fig.update_xaxes(showgrid=True,
+                 gridcolor='#dbddde',
+                 )     # 加上这个  四周都是黑色  ，不加的话只有左下两条线黑色  （就是镜像过去）
+fig.update_yaxes(showgrid=True,
+                 gridcolor='#dbddde',
+                 )
 # fig.write_image('images/MotionNoise.eps')
 html_path = "../htmls/Ewt_Performance.html"
 fig.write_image('../images/Ewt_Performance.eps')
