@@ -55,7 +55,7 @@ fig.add_trace(go.Scatter(x=x2,
                          fill='tozeroy',
                          fillcolor='rgb(255,209,196)',
                          line=dict(width=3,
-                                   color='rgba(247,143,116,0.5)',)
+                                   color='rgba(247,143,116,0.7)',)
                         ))
 
 
@@ -86,6 +86,6 @@ fig.update_layout(annotations=[
 )
 fig.update_yaxes(scaleanchor="x", scaleratio=1,title='True positive rate')
 fig.update_xaxes(constrain='domain',title='False positive rate')
-html_path = os.path.join(h_path, "base_roc.html")
-# pio.write_image(fig,os.path.join(i_path,'base.eps'))
+html_path = os.path.join(h_path, "BaseRoc.html")
+# pio.write_image(fig,os.path.join(i_path,'BaseRoc.eps'))
 pyplot(fig, filename=html_path)

@@ -81,7 +81,6 @@ for true_list,score_list,key,fillcolor,linecolor in zip(true,score,keys,fillcolo
             y=y2,
             fill='tozeroy',
             fillcolor=fillcolor,
-
             line=dict(
                 color=linecolor,
                 width=4,
