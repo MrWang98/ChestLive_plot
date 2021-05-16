@@ -105,7 +105,7 @@ with open('../data/log_EER_size.csv','w') as f:
 # person=['HNC','ChenJiaShun','QinDang','OuRunMin','MMH2','XiaTong',
 #           'BianYaWei','ChenChangXin','HuangZhiHui','WuYuan','LiuSiYing',
 #           'ZJX','LTM','LiZuoLong','ZCY']
-person=['HNC','OuRunMin','WuYuan','LTM','LiZuoLong']
+person=['XuLian','HNC','OuRunMin','HuangJingWen','WuYuan','LTM','LiZuoLong']
 
 data_pre=[]
 names=[]
@@ -120,6 +120,21 @@ for line in text:
             else:
                 t.append(float(d)*100)
         data_pre.append(t)
+
+# with open('EERs.csv','w') as f:
+#     for line in text:
+#         line=line.replace('\n','').split(',')
+#         t = []
+#         names.append(line[0])
+#         f.write(line[0]+',')
+#         for idx,d in enumerate(line[1:]):
+#             if d=='':
+#                 t.append(0)
+#             else:
+#                 t.append(float(d)*100)
+#                 f.write(str(float(d)*100)+',')
+#         data_pre.append(t)
+#         f.write('\n')
 
 data=np.array(data_pre)
 x=[i+1 for i in range(data.shape[1])]
@@ -140,11 +155,22 @@ for d,name,marker_shape,line_shape in zip(data,names,marker_shapes,line_shapes):
                       symbol=marker_shape,
                     ),
                     line=dict(
-                        # dash=line_shape,
                         width=3
                     )
-                    # showlegend=False,
                     ))
+# for d,name in zip(data,names):
+#     fig.add_trace(go.Scatter(x=x,
+#                     y=d,
+#                     name=name,
+#                     # mode='lines+markers',
+#                     marker=dict(
+#                         size=15,
+#                     ),
+#                     line=dict(
+#                         width=3,
+#                               )
+#                              ),
+#                   )
 fig.add_trace(go.Scatter(x=x,
                          y=average,
                          name='Overall',
@@ -167,7 +193,8 @@ fig.update_layout(
                 ),
                 template='simple_white',
                 yaxis=dict(
-                    range=[0,50],
+                    # range=[0,50],
+                    range=[0,70],
                 ),
                 xaxis=dict(
                     range=[0,20],
@@ -189,15 +216,15 @@ fig.update_xaxes(showgrid=True,#将网格去掉
                  linewidth=1.5,
                  linecolor='black', # 将颜色设定为黑色
                  mirror=True,
-                 gridcolor='#F2F2F2',
+                 gridcolor='#dbddde',
                  )     # 加上这个  四周都是黑色  ，不加的话只有左下两条线黑色  （就是镜像过去）
 fig.update_yaxes(title='EER(%)',
                  showgrid=True,
                  linewidth=1.5,
                  linecolor='black',
                  mirror=True,
-                 gridcolor='#F2F2F2',
+                 gridcolor='#dbddde',
                  )
-html_path = os.path.join(h_path,"EERs.html")
-# pio.write_image(fig,os.path.join(i_path,'EERs.eps'))
+html_path = os.path.join(h_path,"TrainSizeEer.html")
+pio.write_image(fig,os.path.join(i_path,'TrainSizeEer.eps'))
 pyplot(fig,filename=html_path)

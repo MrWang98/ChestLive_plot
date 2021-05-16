@@ -56,16 +56,15 @@ with open('average.csv','a') as f:
     for avg in average:
         f.write('{},'.format(avg))
 
-r=50;g=110;b=90
-# colors=['rgb(57,116,94)','rgb(64,134,98)','rgb(83,149,103)']
-colors=['rgb({},{},{})'.format(r+(i+1)*8,g+(i+1)*18,b+(i+1)*6) for i in range(len(data))]
-names=['U{}'.format(i+1) for i in range(len(data))]
+colors=['rgba(210,204,3,1)','rgba(247,183,112,1)','rgba(187,189,191,1)','rgba(233,155,122,1)',
+        'rgba(236,111,70,1)','rgba(178,170,107,1)','rgba(143,238,146,1)','rgba(93,156,204,1)']
+names=['User{}'.format(i+1) for i in range(len(data))]
 #画图
 fig = go.Figure()
 for d,name,color in zip(data,names,colors):
     # x = ['U{}'.format(i+1) for i in range(len(d))]
     fig.add_trace(go.Bar(
-                         showlegend=False,
+                         # showlegend=False,
                          name=name,
                          x=x,
                          y=d,
@@ -84,12 +83,12 @@ fig.update_layout(
                 # showlegend=False,
                 height=520 ,width = 620,
                 font=dict(
-                    family="Time New Roman",  # 所有标题文字的字体
+                    family="Times New Roman",  # 所有标题文字的字体
                     size = 32, # 所有标题文字的大小
                 ),
                 template='simple_white',
                 yaxis=dict(
-                    range=[90,100],
+                    range=[80,100],
                 ),
                 legend=dict(
                     orientation="h",  # 将legend改为横排放置
@@ -97,12 +96,13 @@ fig.update_layout(
                     y=1.02,
                     xanchor="right",
                     x=1,
+
                     font=dict(
-                        size=32,  # 25
+                        size=26,
                         color='black', )
                 ),
                 )
-fig.update_xaxes(showgrid=True,#将网格去掉
+fig.update_xaxes(showgrid=False,#将网格去掉
                  linewidth=1.5,
                  linecolor='black', # 将颜色设定为黑色
                  mirror=True,
@@ -112,9 +112,9 @@ fig.update_yaxes(showgrid=True,
                  linewidth=1.5,
                  linecolor='black',
                  mirror=True,
-                 gridcolor='#F2F2F2',
+                 gridcolor='#dbddde',
                  title='Accuracy(%)'
                  )
-html_path = os.path.join(h_path,"Direction.html")
-pio.write_image(fig,os.path.join(i_path,'Direction.eps'))
+html_path = os.path.join(h_path,"ImpactofDirection.html")
+pio.write_image(fig,os.path.join(i_path,'ImpactofDirection.eps'))
 pyplot(fig,filename=html_path)

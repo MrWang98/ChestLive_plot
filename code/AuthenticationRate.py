@@ -34,8 +34,8 @@ for item in text.items():
     #     f.write("{},{}\n".format(item[0],item[1]))
 l=len(z)
 
-# idxs=[range(0,15),range(15,31),range(31,l)]
-idxs=[range(0,15)]
+idxs=[range(0,15),range(15,31),range(31,l)]
+# idxs=[range(0,15)]
 
 for j,r in enumerate(idxs):
 
@@ -79,3 +79,7 @@ for j,r in enumerate(idxs):
     html_path = os.path.join(h_path,"AuthenticationRate{}.html".format(j))
     # pio.write_image(fig,os.path.join(i_path,'AuthenticationRate{}.eps'.format(j)))
     pyplot(fig,filename=html_path)
+
+fillcolors=['rgba(247,183,112,1)','rgba(187,189,191,1)','rgba(233,155,122,1)',
+        'rgba(236,111,70,1)','rgba(178,170,107,1)','rgba(143,238,146,1)','rgba(93,156,204,1)']
+linecolors=['rgb(209,157,99)','rgb(163,164,165)','rgb(198,138,113)']

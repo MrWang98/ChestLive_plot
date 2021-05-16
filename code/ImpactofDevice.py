@@ -37,8 +37,8 @@ for line in text:
 x=['{}:{}'.format(d1,d2) for d1,d2 in zip(x1,x2)]
 
 fig = go.Figure(data=[
-    go.Bar(name='Enrollment', x=x, y=y1,marker_color='#CFC5BB',width=0.3),
-    go.Bar(name='Login', x=x, y=y2,marker_color='#AC9B91',width=0.3),
+    go.Bar(name='Enrollment', x=x, y=y1,marker_color='rgba(187,189,191,1)',width=0.3),
+    go.Bar(name='Login', x=x, y=y2,marker_color='rgba(247,183,112,1)',width=0.3),
 
 ])
 #设置参数
@@ -59,8 +59,11 @@ fig.update_layout(
                     size = 32, # 所有标题文字的大小
                 ),
                 template='simple_white',
+                yaxis=dict(
+                    # range=[80,100]
                 )
-fig.update_xaxes(showgrid=True,#将网格去掉
+                )
+fig.update_xaxes(showgrid=False,#将网格去掉
                  linewidth=1.5,
                  linecolor='black', # 将颜色设定为黑色
                  mirror=True,
@@ -71,10 +74,10 @@ fig.update_yaxes(title='Accuracy(%)',
                  linewidth=1.5,
                  linecolor='black',
                  mirror=True,
-                 gridcolor='#F2F2F2',
+                 gridcolor='#dbddde',
                  )
 
 
 html_path = "../htmls/ImpactofDevice.html"
-pio.write_image(fig,os.path.join(i_path,'Device.eps'))
+pio.write_image(fig,os.path.join(i_path,'ImpactofDevice.eps'))
 pyplot(fig,filename=html_path)

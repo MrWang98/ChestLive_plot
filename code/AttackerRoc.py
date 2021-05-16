@@ -47,8 +47,9 @@ for key in text.keys():
         true.append(true_list)
         score.append(score_list)
 
-fillcolors=['rgba(164,173,248,0.7)','rgba(255,209,196,0.7)','rgba(201,228,219,0.7)']
-linecolors=['rgb(99,110,250)','rgb(247,143,116)','rgb(130,187,172)']
+fillcolors=['rgba(247,183,112,0.7)','rgba(187,189,191,0.7)','rgba(233,155,122,0.7)',
+        'rgba(236,111,70,1)','rgba(178,170,107,1)','rgba(143,238,146,1)','rgba(93,156,204,1)']
+linecolors=['rgb(209,157,99)','rgb(163,164,165)','rgb(198,138,113)']
 
 
 for true_list,score_list,key,fillcolor,linecolor in zip(true,score,keys,fillcolors,linecolors):
@@ -87,12 +88,6 @@ for true_list,score_list,key,fillcolor,linecolor in zip(true,score,keys,fillcolo
             )
         )
     )
-    # fig = px.area(
-    #     x=x2, y=y2,
-    #     labels=dict(x='False Positive Rate', y='True Positive Rate'),
-    #     width=1000,
-    #     # color='pink'
-    # )
     fig.update_yaxes(scaleanchor="x",
                      scaleratio=1,
                      title='True positive rate')
@@ -126,7 +121,7 @@ for true_list,score_list,key,fillcolor,linecolor in zip(true,score,keys,fillcolo
             range=[-0.04,1.04],
         ),
     )
-    html_path = os.path.join(h_path, "{}_attacker.html".format(key))
-    # pio.write_image(fig,os.path.join(i_path,"{}_attacker.eps".format(key)))
+    html_path = os.path.join(h_path, "AttackerRoc{}.html".format(key))
+    # pio.write_image(fig,os.path.join(i_path,"AttackerRoc{}.eps".format(key)))
     pyplot(fig, filename=html_path)
 

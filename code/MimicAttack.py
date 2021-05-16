@@ -5,8 +5,9 @@ import plotly.io as pio
 pyplot = py.offline.plot
 
 y=[0.88,0.97,1.84]
-x_a=["Victim{}".format(i+1) for i in range(len(y))]
-colors=['#8895B1','#9791A0','#9ca8b8']
+x_a=["{}".format(i+1) for i in range(len(y))]
+colors=['rgba(247,183,112,1)','rgba(187,189,191,1)','rgba(233,155,122,1)',
+        'rgba(236,111,70,1)','rgba(178,170,107,1)','rgba(143,238,146,1)','rgba(93,156,204,1)']
 fig=go.Figure()
 for x,d,color in zip(x_a,y,colors):
     fig.add_trace(go.Bar(y=[d],
@@ -25,7 +26,8 @@ fig.update_layout(height=600 ,width = 650,
                   template="simple_white",
                   )
 
-fig.update_xaxes(showgrid=True,#将网格去掉
+fig.update_xaxes(showgrid=False,#将网格去掉
+                 title='Victim',
                  #showline=True,
                  linewidth=1.5,
                  linecolor='black', # 将颜色设定为黑色
@@ -41,5 +43,5 @@ fig.update_yaxes(showgrid=True,
 
                  )
 html_path = "../htmls/MimicAttack.html"
-# pio.write_image(fig,'../images/MimicAttack.eps')
+pio.write_image(fig,'../images/MimicAttack.eps')
 pyplot(fig,filename=html_path)

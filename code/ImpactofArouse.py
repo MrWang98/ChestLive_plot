@@ -32,38 +32,43 @@ for line in text:
         else:
             t.append(float(d)*100)
     data.append(t)
-
+colors=['rgba(247,183,112,1)','rgba(187,189,191,1)','rgba(233,155,122,1)',
+        'rgba(236,111,70,1)','rgba(178,170,107,1)','rgba(143,238,146,1)','rgba(93,156,204,1)']
 #画图
 fig = go.Figure()
-for d,name in zip(data,names):
-    fig.add_trace(go.Box(y=d, name=name, boxpoints='all'))
+for d,name,color in zip(data,names,colors):
+    fig.add_trace(go.Box(y=d,
+                         name=name,
+                         fillcolor=color,
+                         # line_color=color,
+                         boxpoints='all'))
 
 #设置参数
 fig.update_layout(
                 showlegend=False,
                 height=630 ,width = 750,    #画布大小
                 font=dict(
-                    family="Time New Roman",  # 所有标题文字的字体
+                    family="Times New Roman",  # 所有标题文字的字体
                     size = 32, # 所有标题文字的大小
                 ),
-                template='simple_white'
+                template='simple_white',
+                yaxis=dict(
+                    range=[90,100]
+                )
                 )
 fig.update_xaxes(showgrid=True,#将网格去掉
                  linewidth=1.5,
                  linecolor='black', # 将颜色设定为黑色
                  mirror=True,
-                 gridcolor='#F2F2F2',
+                 gridcolor='#dbddde',
                  )     # 加上这个  四周都是黑色  ，不加的话只有左下两条线黑色  （就是镜像过去）
 fig.update_yaxes(title='Accuracy(%)',
-                 titlefont=dict(
-                   size=36,
-                 ),
                  showgrid=True,
                  linewidth=1.5,
                  linecolor='black',
                  mirror=True,
-                 gridcolor='#F2F2F2',
+                 gridcolor='#dbddde',
                  )
-html_path = os.path.join(h_path,"Arouse.html")
-# pio.write_image(fig,os.path.join(i_path,'Arouse.eps'))
+html_path = os.path.join(h_path,"ImpactofArouse.html")
+pio.write_image(fig,os.path.join(i_path,'ImpactofArouse.eps'))
 pyplot(fig,filename=html_path)

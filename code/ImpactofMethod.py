@@ -17,7 +17,7 @@ else:
 
 #处理数据
 # names=['50db','55db','65db']
-file_name='Average.csv'
+file_name='CompAverage.csv'
 if os.path.exists("../data"):
     with open("../data/"+file_name) as f:
         text=f.readlines()
@@ -36,8 +36,8 @@ for line in text:
     data_pre.append(t)
 
 data=data_pre
-x=['50db','55db','65db']
-colors=['#CFC5BB','#AC9B91']
+x=['50dB','55dB','65dB']
+colors=['rgba(187,189,191,1)','rgba(247,183,112,1)']
 names=['WeChat','ChestLive']
 
 #画图
@@ -86,6 +86,6 @@ fig.update_yaxes(title='Accuracy(%)',
                  mirror=True,
                  gridcolor='#F2F2F2',
                  )
-html_path = os.path.join(h_path,"CompAverage.html")
-# pio.write_image(fig,os.path.join(i_path,'Noise.eps'))
+html_path = os.path.join(h_path,"ImpactofMethod.html")
+# pio.write_image(fig,os.path.join(i_path,'ImpactofMethod.eps'))
 pyplot(fig,filename=html_path)

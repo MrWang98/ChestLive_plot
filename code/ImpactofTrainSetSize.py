@@ -86,7 +86,6 @@ for idx in range(20):
 data=np.array(data_pre)
 x=[i+1 for i in range(data.shape[1])]
 names=["User{}".format(i+1) for i in range(data.shape[0])]
-
 dashes=['dot', 'dash', 'longdash', 'dashdot', 'longdashdot'] #所有的线条类型
 
 fig = go.Figure()
@@ -133,15 +132,15 @@ fig.update_xaxes(showgrid=True,#将网格去掉
                  linewidth=1.5,
                  linecolor='black', # 将颜色设定为黑色
                  mirror=True,
-                 gridcolor='#F2F2F2',
+                 gridcolor='#dbddde',
                  )     # 加上这个  四周都是黑色  ，不加的话只有左下两条线黑色  （就是镜像过去）
 fig.update_yaxes(title='Accuracy(%)',
                  showgrid=True,
                  linewidth=1.5,
                  linecolor='black',
                  mirror=True,
-                 gridcolor='#F2F2F2',
+                 gridcolor='#dbddde',
                  )
-html_path = os.path.join(h_path,"acc.html")
-# pio.write_image(fig,os.path.join(i_path,'EERs.eps'))
+html_path = os.path.join(h_path,"ImpactofTrainSetSize.html")
+pio.write_image(fig,os.path.join(i_path,'ImpactofTrainSetSize.eps'))
 pyplot(fig,filename=html_path)
