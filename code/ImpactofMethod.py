@@ -73,7 +73,7 @@ fig.update_layout(
                 ),
 )
 
-fig.update_xaxes(showgrid=True,#将网格去掉
+fig.update_xaxes(showgrid=False,#将网格去掉
                  linewidth=1.5,
                  linecolor='black', # 将颜色设定为黑色
                  mirror=True,
@@ -84,7 +84,7 @@ fig.update_yaxes(title='Accuracy(%)',
                  linewidth=1.5,
                  linecolor='black',
                  mirror=True,
-                 gridcolor='#F2F2F2',
+                 gridcolor='#dbddde',
                  )
 html_path = os.path.join(h_path,"ImpactofMethod.html")
 # pio.write_image(fig,os.path.join(i_path,'ImpactofMethod.eps'))
