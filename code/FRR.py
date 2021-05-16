@@ -54,16 +54,22 @@ with open('../data/FRR.csv','w') as f:
 average=average/count
 
 person=['XiaTong','OuRunMin','GQY','ZJX','XuLian','LengChao']
+colors=['rgba(210,204,3,1)','rgba(247,183,112,1)','rgba(187,189,191,1)','rgba(233,155,122,1)',
+        'rgba(236,111,70,1)','rgba(178,170,107,1)','rgba(143,238,146,1)','rgba(93,156,204,1)']
 # marker_shapes=['triangle-up-open','diamond-tall-open','circle-open','x-thin-open','y-up-open']
 # line_shapes=[ 'dot', 'dash', 'longdash', 'dashdot','solid', 'longdashdot']
 names=['User{}'.format(i) for i in range(len(person))]
 fig = go.Figure()
-for p,name in zip(person,names):
+for p,name,color in zip(person,names,colors):
     fig.add_trace(go.Bar(y=[all[p]*100],
                     x=[name],
+                     marker=dict(
+                         color=color,
+                     )
                     ))
 fig.add_trace(go.Bar(y=[average*100],
                      x=['Overall'],
+                     marker_color='rgba(93,156,204,1)',
                      ))
 #设置参数
 fig.update_layout(
@@ -93,19 +99,18 @@ fig.update_layout(
                 ),
 )
 
-fig.update_xaxes(showgrid=True,#将网格去掉
+fig.update_xaxes(showgrid=False,#将网格去掉
                  linewidth=1.5,
                  linecolor='black', # 将颜色设定为黑色
                  mirror=True,
-                 gridcolor='#F2F2F2',
                  )     # 加上这个  四周都是黑色  ，不加的话只有左下两条线黑色  （就是镜像过去）
 fig.update_yaxes(title='FRR(%)',
                  showgrid=True,
                  linewidth=1.5,
                  linecolor='black',
                  mirror=True,
-                 gridcolor='#F2F2F2',
+                 gridcolor='#dbddde',
                  )
 html_path = os.path.join(h_path,"FRR.html")
-# pio.write_image(fig,os.path.join(i_path,'FRR.eps'))
+pio.write_image(fig,os.path.join(i_path,'FRR.eps'))
 pyplot(fig,filename=html_path)
