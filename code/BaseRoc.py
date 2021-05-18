@@ -87,5 +87,5 @@ fig.update_layout(annotations=[
 fig.update_yaxes(scaleanchor="x", scaleratio=1,title='True positive rate')
 fig.update_xaxes(constrain='domain',title='False positive rate')
 html_path = os.path.join(h_path, "BaseRoc.html")
-# pio.write_image(fig,os.path.join(i_path,'BaseRoc.eps'))
+pio.write_image(fig,os.path.join(i_path,'BaseRoc.eps'))
 pyplot(fig, filename=html_path)

@@ -45,5 +45,5 @@ fig.update_yaxes(showgrid=True,
                  gridcolor='#dbddde',
                  )
 html_path = "../htmls/NopersonFrequencydomain.html"
-# fig.write_image('../images/NopersonFrequencydomain.eps')
+fig.write_image('../images/NopersonFrequencydomain.eps')
 pyplot(fig,filename=html_path)

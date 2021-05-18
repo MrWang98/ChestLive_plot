@@ -132,6 +132,5 @@ fig.update_yaxes(showgrid=True,
 
 x0=np.squeeze(data0['subfig1_seg1_end'].tolist())
 html_path = "../htmls/ChestVoice.html"
-
 fig.write_image('../images/ChestVoice.eps')
 pyplot(fig,filename=html_path)

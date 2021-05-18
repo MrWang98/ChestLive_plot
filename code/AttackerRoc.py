@@ -121,6 +121,6 @@ for true_list,score_list,key,fillcolor,linecolor in zip(true,score,keys,fillcolo
         ),
     )
     html_path = os.path.join(h_path, "AttackerRoc{}.html".format(key))
-    # pio.write_image(fig,os.path.join(i_path,"AttackerRoc{}.eps".format(key)))
+    pio.write_image(fig,os.path.join(i_path,"AttackerRoc{}.eps".format(key)))
     pyplot(fig, filename=html_path)
 

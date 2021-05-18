@@ -90,5 +90,5 @@ fig.update_yaxes(showgrid=True,
                  )
 
 html_path = "../htmls/static_noise.html"
-fig.write_image('../images/static_noise.eps')
+# fig.write_image('../images/static_noise.eps')
 pyplot(fig,filename=html_path)
